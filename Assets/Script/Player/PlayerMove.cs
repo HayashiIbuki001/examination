@@ -4,7 +4,10 @@ public class PlayerMove : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    [SerializeField] float Speed = 0;
+    [SerializeField] float speedX = 1f;
+    [SerializeField] float speedY = 1f;
+
+    float h, v;
 
     void Start()
     {
@@ -13,17 +16,21 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        h = Input.GetAxis("Horizontal");
+        v = Input.GetAxis("Vertical");
+    }
+
+    void FixedUpdate()
+    {
         Move();
     }
 
     void Move()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        float x = h * speedX;
+        float y = v * (v > 0 ? speedY : speedY * 0.5f);
 
-        float x = h * Speed;
-        float y = v * (v > 0 ? Speed : Speed / 0.5f);
-        Vector2 moveUp = new Vector2 (h, v);
-
+        Vector2 move = new Vector2(x, y);
+        rb.MovePosition(rb.position + move * Time.fixedDeltaTime);
     }
 }
