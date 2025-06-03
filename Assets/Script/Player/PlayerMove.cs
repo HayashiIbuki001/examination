@@ -31,6 +31,6 @@ public class PlayerMove : MonoBehaviour
         float y = v * (v > 0 ? speedY : speedY * 0.5f);
 
         Vector2 move = new Vector2(x, y);
-        rb.MovePosition(rb.position + move * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + move * Time.deltaTime);
     }
 }
