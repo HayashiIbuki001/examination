@@ -51,7 +51,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Time.timeScale = isGameOver ? 0f : 1f;
+        if (isGameOver)
+        {
+            Time.timeScale = 0f;
+        }
     }
 
     private void Distance()

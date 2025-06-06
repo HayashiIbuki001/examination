@@ -862,6 +862,7 @@ GameObject:
   - component: {fileID: 1444256198}
   - component: {fileID: 1444256197}
   - component: {fileID: 1444256196}
+  - component: {fileID: 1444256199}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -975,6 +976,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1444256199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444256195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf86e3f85b8be144a6c30e5f34262b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 30
 --- !u!1 &1461537728
 GameObject:
   m_ObjectHideFlags: 3
@@ -1211,6 +1225,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5763042441169546608, guid: c0089c32242ab824fa68a0b94f1522d9, type: 3}
   m_PrefabInstance: {fileID: 6585583259203603188}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1843466450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843466445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a1bca0181fe02e439e6eff28bd0c96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  invincibleTime: 3
 --- !u!1001 &6585583259203603188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1270,7 +1298,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5763042441169546608, guid: c0089c32242ab824fa68a0b94f1522d9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1843466450}
   m_SourcePrefab: {fileID: 100100000, guid: c0089c32242ab824fa68a0b94f1522d9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
