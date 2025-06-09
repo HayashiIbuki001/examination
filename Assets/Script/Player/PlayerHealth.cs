@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -11,9 +12,15 @@ public class PlayerHealth : MonoBehaviour
     /// <summary> –³“GŠÔ‚©‚Ç‚¤‚© </summary>
     private bool isInvincible = false;
 
+    [SerializeField] private Slider hpBar;
+
     void Start()
     {
         currentHealth = maxHealth; // ‘Ì—Í‚ğ“¯Šú
+
+        // HPƒo[‰Šúİ’è
+        hpBar.maxValue = maxHealth;
+        hpBar.value = currentHealth;
     }
 
     void TakeDamage(int damage)
@@ -21,7 +28,10 @@ public class PlayerHealth : MonoBehaviour
         if (isInvincible || currentHealth <= 0) return;
 
         currentHealth -= damage; // HP‚ğŒ¸‚ç‚·
+        currentHealth = Mathf.Max(currentHealth, 0);
         Debug.Log("HP : " + currentHealth);
+        
+        hpBar.value = currentHealth;
 
         if (currentHealth <= 0)
         {

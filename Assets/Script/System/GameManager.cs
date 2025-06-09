@@ -1,11 +1,13 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     [SerializeField] GameObject playerObj;
+    [SerializeField] private GameObject gameOverText;
 
     /// <summary> プレイヤーから初期位置までの距離 </summary>
     public float plDistance = 0f;
@@ -53,8 +55,16 @@ public class GameManager : MonoBehaviour
     {
         if (isGameOver)
         {
-            Time.timeScale = 0f;
+            StartCoroutine(GameOverRoutine());
         }
+    }
+
+    private IEnumerator GameOverRoutine()
+    {
+        Time.timeScale = 0f; // 停止
+        yield return new WaitForSecondsRealtime(3f); // 三秒待つ
+        
+        gameOverText.SetActive(true);
     }
 
     private void Distance()
