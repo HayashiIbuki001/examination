@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -34,8 +35,8 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage; // HP‚ðŒ¸‚ç‚·
         currentHealth = Mathf.Max(currentHealth, 0);
         Debug.Log("HP : " + currentHealth);
-        
-        hpBar.value = currentHealth;
+
+        hpBar.DOValue(currentHealth, 0.5f);
 
         if (currentHealth <= 0)
         {
@@ -55,7 +56,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
 
-        hpBar.value = currentHealth;
+        hpBar.DOValue(currentHealth, 0.5f);
 
         if (currentHealth <= 0)
         {

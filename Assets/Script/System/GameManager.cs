@@ -55,13 +55,16 @@ public class GameManager : MonoBehaviour
     {
         if (isGameOver)
         {
+            // PlayerMoveƒXƒNƒŠƒvƒg’âŽ~
+            var playerMove = FindAnyObjectByType<PlayerMove>();
+            if (playerMove != null) playerMove.enabled = false;
+
             StartCoroutine(GameOverRoutine());
         }
     }
 
     private IEnumerator GameOverRoutine()
     {
-        Time.timeScale = 0f; // ’âŽ~
         yield return new WaitForSecondsRealtime(3f); // ŽO•b‘Ò‚Â
         
         gameOverText.SetActive(true);
