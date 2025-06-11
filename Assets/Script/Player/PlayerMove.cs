@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
         rb = GetComponent<Rigidbody2D>();
     }
 

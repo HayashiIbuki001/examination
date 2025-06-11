@@ -1,7 +1,8 @@
-using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
 using DG.Tweening;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
+        hpBar = GameObject.Find("HPBar").GetComponent<Slider>();
+
         currentHealth = maxHealth; // 体力を同期
 
         // HPバー初期設定
@@ -104,4 +107,26 @@ public class PlayerHealth : MonoBehaviour
             damageTimer = 0f;
         } // 持続ダメゾーンから出た
     }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        hpBar = GameObject.Find("HPBar").GetComponent<Slider>();
+
+        if (hpBar != null)
+        {
+            hpBar.maxValue = maxHealth;
+            hpBar.value = currentHealth; // ここで体力を正しく同期！
+        }
+    }
+
 }
