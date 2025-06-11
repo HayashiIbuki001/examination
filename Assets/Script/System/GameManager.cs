@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject playerObj;
     [SerializeField] private GameObject gameOverText;
 
+    [SerializeField] private float goalY = 30000f;
+
     /// <summary> プレイヤーから初期位置までの距離 </summary>
     public float plDistance = 0f;
     /// <summary> スタートから経過した時間 </summary>
@@ -72,10 +74,13 @@ public class GameManager : MonoBehaviour
 
     private void Distance()
     {
-        plDistance = playerObj.transform.position.y - startPos.y; // 今のy座標-初期位置のy座標
+        float currentY = playerObj.transform.position.y; // 今のプレイヤーのY
+        float startY = startPos.y;
 
-        // Text表示 
-        disText.text = plDistance.ToString("F2") + "m";     
+        float progress = Mathf.Clamp01((currentY - startY) / goalY); // 進捗率 (上昇した高さ / ゴールの高さ)
+        float percentage = progress * 100f;
+
+        disText.text = percentage.ToString("F2") + "%";
     }
 
     private void PlayTime()

@@ -1919,6 +1919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerObj: {fileID: 1843466445}
   gameOverText: {fileID: 1217265753}
+  goalY: 1000
   plDistance: 0
   plTime: 0
   isGameOver: 0
@@ -2521,8 +2522,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 729.39, y: 462}
-  m_SizeDelta: {x: 461.2238, y: 137.1821}
+  m_AnchoredPosition: {x: 635.85474, y: 462}
+  m_SizeDelta: {x: 648.2942, y: 137.1821}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1568196092
 MonoBehaviour:
