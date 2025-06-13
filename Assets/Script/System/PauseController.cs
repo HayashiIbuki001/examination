@@ -31,12 +31,42 @@ public class PoseController : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f; // 再開
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        var player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            Destroy(player);
+        }
+
+        pauseUI.SetActive(false);
+        SceneManager.LoadScene("StageScene");
     }
 
     public void Title()
     {
-        Time.timeScale = 1f; // 再開
+        Time.timeScale = 1f;
+        pauseUI.SetActive(false);
+
+        // プレイヤー削除
+        var player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            Destroy(player);
+        }
+
+        // GameManager削除
+        if (GameManager.Instance != null)
+        {
+            Destroy(GameManager.Instance.gameObject);
+        }
+
+        // SceneChangeAnimation削除
+        if (SceneChangeAnimation.Instance != null)
+        {
+            Destroy(SceneChangeAnimation.Instance.gameObject);
+        }
+
         SceneManager.LoadScene("TitleScene");
     }
+
 }

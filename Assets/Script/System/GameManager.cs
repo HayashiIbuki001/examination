@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text disText;
 
     string currentScene = "";
+    private bool isTransitioning = false; // アニメーションが重複しないように
+    private bool isFirstLoad = true; // 最初のステージかどうか
 
     void Awake()
     {
@@ -91,6 +94,7 @@ public class GameManager : MonoBehaviour
         disText.text = percentage.ToString("F2") + "%";
     }
 
+    // 時間関連
     private void PlayTime()
     {
         plTime += UnityEngine.Time.deltaTime;
@@ -98,21 +102,33 @@ public class GameManager : MonoBehaviour
 
     private void SceneChange()
     {
+        if (isTransitioning) return;
 
         if (progress >= 1f / 3f && currentScene == "StageScene")
         {
-            SceneManager.LoadScene("StageScene2");
+            isTransitioning = true;
+            StartCoroutine(TransitionScene("StageScene2"));
         }
         else if (progress >= 2f / 3f && currentScene == "StageScene2")
         {
-            SceneManager.LoadScene("StageScene3");
+            isTransitioning = true;
+            StartCoroutine(TransitionScene("StageScene3"));
         }
+    }
+
+    private IEnumerator TransitionScene(string sceneName)
+    {
+        SceneChangeAnimation.Instance.AnimIn(1f);
+
+        yield return new WaitForSeconds(1.5f);
+
+        SceneManager.LoadScene(sceneName);
     }
 
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-    } //シーンをシーンを読み込んだらOnSceneLoadedを起動
+    } // シーンを読み込んだらOnSceneLoadedを起動
 
     void OnDisable()
     {
@@ -133,6 +149,7 @@ public class GameManager : MonoBehaviour
             startPos = Vector3.zero;
         }
 
+        // 進捗率のシーンごとのプリセット
         switch (currentScene)
         {
             case "StageScene":
@@ -145,5 +162,17 @@ public class GameManager : MonoBehaviour
                 progressOffset = 2f / 3f;
                 break;
         }
+
+        if (isFirstLoad)
+        {
+            SceneChangeAnimation.Instance.animImage.rectTransform.anchoredPosition = new Vector2(0, -Screen.height);
+            isFirstLoad = false;
+        }
+        else
+        {
+            SceneChangeAnimation.Instance?.AnimOut(1f);
+        }
+
+        isTransitioning = false;
     }
 }
