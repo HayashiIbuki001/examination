@@ -10,9 +10,13 @@ public class MoveEnemy : MonoBehaviour
     /// <summary> ‚Ç‚Á‚¿‚Ì•ûŒü‚É“®‚¢‚Ä‚¢‚é‚©(true = Right) </summary>
     private bool movingY = true;
 
+    private SpriteRenderer sr;
+
     void Start()
     {
         startPos = transform.position; // ‰Šú
+        sr = GetComponent<SpriteRenderer>();
+        sr.flipX = !sr.flipX;
     }
 
     private void Update()
@@ -27,6 +31,7 @@ public class MoveEnemy : MonoBehaviour
             if (offset >= moveDistance)
             {
                 movingY = false;
+                sr.flipX = !sr.flipX;
             }
         }
         else
@@ -36,6 +41,7 @@ public class MoveEnemy : MonoBehaviour
             if (offset <= -moveDistance)
             {
                 movingY = true;
+                sr.flipX = !sr.flipX;
             }
         }
     }
