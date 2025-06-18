@@ -6,8 +6,11 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField] float speedX = 1f;
     [SerializeField] float speedY = 1f;
+    [SerializeField] float moveAfterDamage = 0.3f;
 
     float h, v;
+
+    public PlayerHealth playerHealth;
 
     void Start()
     {
@@ -31,7 +34,10 @@ public class PlayerMove : MonoBehaviour
         float x = h * speedX;
         float y = v * (v > 0 ? speedY : speedY * 0.5f);
 
-        Vector2 move = new Vector2(x, y);
+        // ダメージ中の移動速度倍率
+        float speedMultiplier = playerHealth.isInvincible ? moveAfterDamage : 1f;
+
+        Vector2 move = new Vector2(x, y) * speedMultiplier;
         rb.MovePosition(rb.position + move * Time.deltaTime);
     }
 }

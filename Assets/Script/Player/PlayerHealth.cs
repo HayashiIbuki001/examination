@@ -12,16 +12,19 @@ public class PlayerHealth : MonoBehaviour
     /// <summary> –³“GŠÔ </summary>
     [SerializeField] private float invincibleTime = 1.0f;
     /// <summary> –³“GŠÔ‚©‚Ç‚¤‚© </summary>
-    private bool isInvincible = false;
+    public bool isInvincible = false;
 
     /// <summary> ‘±ƒ_ƒ[ƒW‚Ì•b”ŠÔŠu </summary>
     [SerializeField] private float damageInterval = 1.0f;
     private float damageTimer = 0f;
+    public AudioClip damageSE;
+    AudioSource audiosource;
 
     [SerializeField] private Slider hpBar;
 
     void Start()
     {
+        audiosource = GetComponent<AudioSource>();
         hpBar = GameObject.Find("HPBar").GetComponent<Slider>();
 
         currentHealth = maxHealth; // ‘Ì—Í‚ğ“¯Šú
@@ -73,7 +76,15 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator InvincibilityTime()
     {
         isInvincible = true;
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.5f); // Ô,”¼“§–¾
+
+        audiosource.PlayOneShot(damageSE);
+
         yield return new WaitForSeconds(invincibleTime);
+
+        GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f, 1f); // –ß‚·
+        GetComponent<Collider2D>().enabled = true;
         isInvincible = false;
     }
 
@@ -125,7 +136,7 @@ public class PlayerHealth : MonoBehaviour
         if (hpBar != null)
         {
             hpBar.maxValue = maxHealth;
-            hpBar.value = currentHealth; // ‚±‚±‚Å‘Ì—Í‚ğ³‚µ‚­“¯ŠúI
+            hpBar.value = currentHealth; // ‘Ì—Í‚ğ“¯Šú
         }
     }
 
