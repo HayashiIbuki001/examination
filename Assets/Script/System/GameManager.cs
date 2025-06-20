@@ -114,6 +114,10 @@ public class GameManager : MonoBehaviour
             isTransitioning = true;
             StartCoroutine(TransitionScene("StageScene3"));
         }
+        else if (progress >= 1f && currentScene == "StageScene3")
+        {
+            SceneManager.LoadScene("ResultScene");
+        }
     }
 
     private IEnumerator TransitionScene(string sceneName)
