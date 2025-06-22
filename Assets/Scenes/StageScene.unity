@@ -3529,6 +3529,10 @@ PrefabInstance:
       propertyPath: hpBar
       value: 
       objectReference: {fileID: 1067323347}
+    - target: {fileID: 6618606551329298977, guid: c0089c32242ab824fa68a0b94f1522d9, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

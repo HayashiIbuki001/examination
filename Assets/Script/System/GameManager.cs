@@ -78,7 +78,10 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(3f); // ŽO•b‘Ò‚Â
 
-        Debug.Log("GameOver");
+        if (currentScene != "ResultScene")
+        {
+            SceneManager.LoadScene("ResultScene");
+        }
     }
 
     private void Distance()
