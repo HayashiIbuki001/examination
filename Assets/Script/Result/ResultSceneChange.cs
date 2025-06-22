@@ -7,14 +7,21 @@ public class ResultSceneChange : MonoBehaviour
 {
     public void ReStart()
     {
-        Destroy(GameManager.Instance.gameObject);
-        SceneManager.LoadScene("StageScene");
+        if (GameManager.Instance != null)
+        {
+            Destroy(GameManager.Instance.gameObject);
+        }
+            SceneManager.LoadScene("StageScene");
     }
 
     public void Title()
     {
         DOTween.KillAll();
-        Destroy(GameManager.Instance.gameObject);
+
+        if (GameManager.Instance != null)
+        {
+            Destroy(GameManager.Instance.gameObject);
+        }
         SceneManager.LoadScene("TitleScene");
     }
 }

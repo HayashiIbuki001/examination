@@ -11,7 +11,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject playerObj;
 
     [SerializeField] private float goalY = 30000f;
+
+    /// <summary> 最高到達率 </summary>
     private float progress = 0f;
+    public float Progress => progress; // リザルトでの読み取り専用
     private float progressOffset = 0f;
 
     /// <summary> プレイヤーから初期位置までの距離 </summary>
@@ -91,10 +94,22 @@ public class GameManager : MonoBehaviour
         float currentY = playerObj.transform.position.y; // 今のプレイヤーのY
         float startY = startPos.y;
 
-        progress = Mathf.Clamp01((currentY - startY) / goalY + progressOffset); // 進捗率 (上昇した高さ / ゴールの高さ)
+        float nowProgress = Mathf.Clamp01((currentY - startY) / goalY + progressOffset); // 進捗率 (上昇した高さ / ゴールの高さ)
+        UpdateProgress(nowProgress); //到達率更新
+
         float percentage = progress * 100f;
 
         disText.text = percentage.ToString("F2") + "%";
+
+    }
+
+    // 到達率が下がらないようにする
+    public void UpdateProgress(float newProgress)
+    {
+        if (newProgress > progress)
+        {
+            progress = newProgress;
+        }
     }
 
     // 時間関連
