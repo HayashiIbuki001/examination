@@ -118,26 +118,4 @@ public class PlayerHealth : MonoBehaviour
             damageTimer = 0f;
         } // ‘±ƒ_ƒƒ][ƒ“‚©‚ço‚½
     }
-
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        hpBar = GameObject.Find("HPBar").GetComponent<Slider>();
-
-        if (hpBar != null)
-        {
-            hpBar.maxValue = maxHealth;
-            hpBar.value = currentHealth; // ‘Ì—Í‚ğ“¯Šú
-        }
-    }
-
 }
