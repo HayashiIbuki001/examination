@@ -106,6 +106,7 @@ public class PlayerHealth : MonoBehaviour
             if (collision.gameObject.TryGetComponent<IDamageDealer>(out var dealer))
             {
                 damageTimer += Time.deltaTime;
+                GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 0.5f); // ê‘,îºìßñæ
                 if (damageTimer >= damageInterval)
                 {
                     DamageZone(dealer.Damage);
@@ -113,9 +114,14 @@ public class PlayerHealth : MonoBehaviour
                 }
             }
         }
-        else
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("DamageZone"))
         {
+            GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f, 1f);
             damageTimer = 0f;
-        } // éùë±É_ÉÅÉ]Å[ÉìÇ©ÇÁèoÇΩ
+        }
     }
 }
