@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public float plTime = 0f;
     /// <summary> ゲームオーバー判定(true = GameOver)</summary>
     public bool isGameOver;
+    private bool isGameOverRunning; // ゲームオーバーの処理を一回だけにする
     private Vector3 startPos;
 
     public TMP_Text disText;
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour
     string currentScene = "";
     private bool isTransitioning = false; // アニメーションが重複しないように
     private bool isFirstLoad = true; // 最初のステージかどうか
+
+    ParticleSystem deathEffect;
 
     void Awake()
     {
@@ -53,7 +56,11 @@ public class GameManager : MonoBehaviour
         if (playerObj != null)
         {
             startPos = playerObj.transform.position;
+
+            deathEffect = playerObj.transform.Find("DeathEffect")?.GetComponent<ParticleSystem>();
+            deathEffect.gameObject.SetActive(false);
         }
+        //Debug.Log("DeathEffect found? " + (deathEffect != null));
     }
 
     // Update is called once per frame
@@ -67,8 +74,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        if (isGameOver)
+        if (isGameOver && !isGameOverRunning)
         {
+            isGameOverRunning = true;
+
             // PlayerMoveスクリプト停止
             var playerMove = FindAnyObjectByType<PlayerMove>();
             if (playerMove != null) playerMove.enabled = false;
@@ -79,7 +88,21 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator GameOverRoutine()
     {
+        if (deathEffect != null)
+        {
+            deathEffect.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+
+            deathEffect.Play();            
+        }
+
         yield return new WaitForSecondsRealtime(3f); // 三秒待つ
+
+        if (deathEffect != null)
+        {
+            deathEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            deathEffect.gameObject.SetActive(false);
+        }
 
         if (currentScene != "ResultScene")
         {

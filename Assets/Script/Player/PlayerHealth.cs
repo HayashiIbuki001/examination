@@ -21,9 +21,13 @@ public class PlayerHealth : MonoBehaviour
     AudioSource audiosource;
 
     [SerializeField] private Slider hpBar;
+    [SerializeField] private CanvasGroup effectCanvasGroup;
 
     void Start()
     {
+        effectCanvasGroup = GameObject.Find("DamageEffect").GetComponent<CanvasGroup>();
+        effectCanvasGroup.alpha = 0; // ダメージエフェクトの画像を透明に
+
         audiosource = GetComponent<AudioSource>();
         hpBar = GameObject.Find("HPBar").GetComponent<Slider>();
 
@@ -42,6 +46,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Max(currentHealth, 0);
         Debug.Log("HP : " + currentHealth);
 
+        StartCoroutine(DamageEffect());
         hpBar.DOValue(currentHealth, 0.5f);
 
         if (currentHealth <= 0)
@@ -70,7 +75,18 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    
+    IEnumerator DamageEffect()
+    {
+        effectCanvasGroup.alpha = 1; // ダメージエフェクト画像を表示
+        yield return new WaitForSeconds(0.1f);
+
+        while (effectCanvasGroup.alpha > 0)
+        {
+            effectCanvasGroup.alpha -= Time.deltaTime * 2; // 少しづつ透明に
+            yield return null; 
+        } // 0になったら返す
+    }
+
 
     /// <summary> 無敵時間の処理 </summary>
     private IEnumerator InvincibilityTime()
