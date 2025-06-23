@@ -1490,7 +1490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &610938254
 Transform:
   m_ObjectHideFlags: 0
@@ -2308,7 +2308,7 @@ GameObject:
   - component: {fileID: 1152534237}
   m_Layer: 0
   m_Name: System
-  m_TagString: Untagged
+  m_TagString: System
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3834,6 +3834,7 @@ SceneRoots:
   - {fileID: 6585583259203603188}
   - {fileID: 867401031}
   - {fileID: 9222111592044537944}
+  - {fileID: 1602427210}
   - {fileID: 5449226570436702261}
   - {fileID: 1208135989}
   - {fileID: 1281238391}
@@ -3846,4 +3847,3 @@ SceneRoots:
   - {fileID: 245767654}
   - {fileID: 1097486020}
   - {fileID: 1152534235}
-  - {fileID: 1602427210}

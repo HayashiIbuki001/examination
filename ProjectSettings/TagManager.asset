@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - DamageZone
   - Wall
+  - System
   layers:
   - Default
   - TransparentFX
