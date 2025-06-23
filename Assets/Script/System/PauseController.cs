@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PoseController : MonoBehaviour
 {
     [SerializeField] private GameObject pauseUI;
+    [SerializeField] private GameObject escText;
 
     void Update()
     {
@@ -18,6 +19,7 @@ public class PoseController : MonoBehaviour
             {
                 Time.timeScale = 0f; // í‚é~
                 pauseUI.SetActive(true);
+                escText.SetActive(false);
             } //ÇµÇƒÇ»Ç©Ç¡ÇΩÇÁ
         }
     }
@@ -26,6 +28,7 @@ public class PoseController : MonoBehaviour
     {
         Time.timeScale = 1f; // çƒäJ
         pauseUI.SetActive(false);
+        escText.SetActive(true);
     }
 
     public void Restart()
