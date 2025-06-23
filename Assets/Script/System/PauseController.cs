@@ -41,6 +41,12 @@ public class PoseController : MonoBehaviour
             Destroy(player);
         }
 
+        var system = GameObject.FindWithTag ("System");
+        if (system != null)
+        {
+            Destroy(system);
+        }
+
         pauseUI.SetActive(false);
         SceneManager.LoadScene("StageScene");
     }
