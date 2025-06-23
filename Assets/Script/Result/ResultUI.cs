@@ -13,8 +13,8 @@ public class ResultUI : MonoBehaviour
             float progress = GameManager.Instance.Progress;
             float time = GameManager.Instance.plTime;
 
-            percentageText.text = "到達率：" + (progress * 100f).ToString("F2") + "%";
-            timeText.text = "タイム：" + time.ToString("F2") + "秒";
+            percentageText.text = "到達率 : " + (progress * 100f).ToString("F2") + "%";
+            timeText.text = "タイム : " + time.ToString("F2") + "秒";
         }
     }
 }

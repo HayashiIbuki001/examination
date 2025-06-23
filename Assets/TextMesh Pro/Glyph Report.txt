@@ -1,16 +1,0 @@
-Font: Corporate Logo Rounded ver3  Style: Bold
-Point Size: 28   Padding: 5   SP/PD Ratio: 17.9%
-
-Characters included: 235/238
-Missing characters: 3
-Excluded characters: 0
-
-Characters missing from font file:
-----------------------------------------
-ID: 9	Hex: 9	Char [	]
-ID: 13	Hex: D	Char []
-ID: 10	Hex: A	Char [
-]
-
-Characters excluded from packing:
-----------------------------------------
